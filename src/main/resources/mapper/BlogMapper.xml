@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hmdp.mapper.BlogMapper">
+
+    <insert id="addBlog" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_blog(shop_id, user_id, title, images, content,create_time,update_time)
+            value
+            (#{shopId},#{userId},#{title},#{images},#{content},#{createTime},#{updateTime})
+    </insert>
+    <select id="getBlogList" resultType="com.hmdp.entity.Blog">
+        select * from tb_blog where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+</mapper>
